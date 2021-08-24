@@ -2,16 +2,23 @@ import View from './view.js';
 
 export default class Model {
     constructor() {
+        //Chronometer
         this.hours = 0;
         this.minutes = 0;
         this.seconds = 0;
         this.miliseconds = 0;
 
+        //Internal variables
         this.startTime = 0;
         this.end = 0;
         this.diff = 0;
         this.timerID = 0;
         this.view = null;
+
+        //Start-Stop variables
+        this.pause = 0;
+        this.release = 0;
+        this.pauseOffset = 0;
     }
 
     setView(view) {
@@ -22,7 +29,13 @@ export default class Model {
     chrono() {
         this.end = new Date();
         this.diff = this.end - this.startTime;
+        this.diff -= this.pauseOffset;
         this.diff = new Date(this.diff);
+        console.log(this.diff);
+        //this.pauseOffset = 0;
+        
+        //console.log(this.diff);
+        
 
         this.miliseconds = this.diff.getMilliseconds();
         this.seconds = this.diff.getSeconds();
@@ -34,11 +47,23 @@ export default class Model {
     }
 
     startRunning() {
-        this.startTime = new Date();
+        if(this.startTime === 0) {
+            this.startTime = new Date();
+        } else {
+            this.release = performance.now();
+            this.pauseOffset += (this.release - this.pause);
+        }
         this.chrono();
     }
 
+    resetRunning() {
+        this.startTime = 0;
+        this.pauseOffset = 0;
+        this.startRunning();
+    }
+
     stopRunning() {
-        clearInterval(this.timerID);
+        this.pause = performance.now();
+        clearTimeout(this.timerID);
     }
 }

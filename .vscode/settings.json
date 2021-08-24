@@ -1,0 +1,14 @@
+{
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.suggest.completeJSDocs": true,
+    "javascript.suggest.includeCompletionsForImportStatements": true,
+    "javascript.suggest.completeFunctionCalls": false,
+    "javascript.suggest.enabled": true,
+    "javascript.suggest.includeAutomaticOptionalChainCompletions": true,
+    "javascript.suggest.autoImports": true,
+    "launch": {
+        
+        "configurations": [],
+        "compounds": []
+    },
+}
