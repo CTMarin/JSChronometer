@@ -7,6 +7,7 @@ import Model from './model.js';
 export default class View {
     constructor() {
         this.model = null;
+        this.table = document.getElementById('results');
         this.start = new Start();
         this.stop = new Stop();
         this.reset = new Reset();
@@ -24,6 +25,12 @@ export default class View {
         this.start.onClick(() => this.model.startRunning());
         this.stop.onClick(() => this.model.stopRunning());
         this.reset.onClick(() => this.model.resetRunning());
+        this.save.onClick(() => this.model.saveCurrentTime());
+    }
+
+    render() {
+        const results = this.model.getResults();
+        results.forEach((result) => this.createRow(result));
     }
 
     update() {
@@ -33,5 +40,36 @@ export default class View {
             (this.model.minutes).toLocaleString(undefined, {minimumIntegerDigits: 2}) + ':' +
             (this.model.seconds).toLocaleString(undefined, {minimumIntegerDigits: 2}) + '.' +
             (this.model.miliseconds).toLocaleString(undefined, {minimumIntegerDigits: 3});
+    }
+
+    saveTime() {
+        const time =         
+            (this.model.hours).toLocaleString(undefined, {minimumIntegerDigits: 2})  + ':' +
+            (this.model.minutes).toLocaleString(undefined, {minimumIntegerDigits: 2}) + ':' +
+            (this.model.seconds).toLocaleString(undefined, {minimumIntegerDigits: 2}) + '.' +
+            (this.model.miliseconds).toLocaleString(undefined, {minimumIntegerDigits: 3});;
+        const result = this.model.addResult(time);
+        this.createRow(result);
+    }
+
+    createRow(result) {
+        const row = this.table.insertRow();
+        row.setAttribute('id', result.id);
+        row.innerHTML = `
+            <td style="position: relative; left: 0%;">${result.id}</td>
+            <td style="position: relative; left: 25%;">${result.time}</td>
+            <td style="position: relative; left: 25%;"></td>
+        `
+
+        const delBtn = document.createElement('button');
+        delBtn.classList.add('delete');
+        delBtn.innerHTML = '<i class="fa fa-minus" aria-hidden="true"></i>';
+        delBtn.onclick = () => this.removeRow(result.id);
+        row.children[2].appendChild(delBtn);
+    }
+
+    removeRow(id) {
+        this.model.deleteResult(id);
+        document.getElementById(id).remove();
     }
 }

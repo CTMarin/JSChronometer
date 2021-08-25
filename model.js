@@ -19,11 +19,19 @@ export default class Model {
         this.pause = 0;
         this.release = 0;
         this.pauseOffset = 0;
+
+        this.results = JSON.parse(localStorage.getItem('result'));
+        this.currentID = 0;
     }
 
     setView(view) {
         this.view = view;
         this.view.update();
+    }
+
+    getResults() {
+        const results = [];
+        return this.results.map((result) => ({...result}));
     }
 
     chrono() {
@@ -64,5 +72,33 @@ export default class Model {
     stopRunning() {
         this.pause = performance.now();
         clearTimeout(this.timerID);
+    }
+
+    saveCurrentTime() {
+        this.view.saveTime();
+    }
+
+    findResult(id) {
+        return this.results.findIndex((result) => result.id === id);
+    }
+
+    deleteResult(id) {
+        const index = this.findResult(id);
+        this.results.splice(index, 1);
+        this.save();
+    }
+
+    addResult(time) {
+        const result = {
+            id: this.currentID++,
+            time: time, 
+        }
+        this.results.push(result);
+        this.save();
+        return {...result};
+    }
+
+    save() {
+        localStorage.setItem('result', JSON.stringify(this.results));
     }
 }
