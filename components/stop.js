@@ -5,6 +5,10 @@ export default class Stop {
 
     onClick(callback) {
         this.btn.onclick = () => {
+            document.getElementById("start").style.removeProperty("display");
+            document.getElementById("start").innerText = "Cont";
+            document.getElementById("reset").style.removeProperty("display");
+            this.btn.style.display = "none";
             callback();
         }
     }

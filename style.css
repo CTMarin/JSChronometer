@@ -1,0 +1,30 @@
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: white;
+    font-family: sans-serif;
+    font: bolder;
+    border: none;
+    padding: 5px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.chrono {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 100px;
+}
+
+body {
+    background-color: #18191c;
+}

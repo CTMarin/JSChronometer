@@ -10,6 +10,9 @@ export default class View {
         this.stop = new Stop();
         this.reset = new Reset();
         this.currentTime = 0;
+
+        this.stop.btn.style.display = "none";
+        this.reset.btn.style.display = "none";
     }
 
     setModel(model) {

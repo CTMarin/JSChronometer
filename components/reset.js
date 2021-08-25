@@ -5,6 +5,9 @@ export default class Reset {
 
     onClick(callback) {
         this.btn.onclick = () => {
+            document.getElementById("start").style.display = "none";
+            document.getElementById("stop").style.removeProperty("display");
+            this.btn.style.display = "none";
             callback();
         }
     }
