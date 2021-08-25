@@ -1,11 +1,10 @@
-export default class Reset {
+export default class Save {
     constructor() {
-        this.btn = document.getElementById('reset');
+        this.btn = document.getElementById('save');
     }
 
     onClick(callback) {
         this.btn.onclick = () => {
-            this.btn.style.display = "none";
             callback();
         }
     }

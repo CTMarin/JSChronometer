@@ -6,15 +6,25 @@
 button {
     background-color: white;
     font-family: sans-serif;
-    font: bolder;
+    font-size: x-large;
     border: none;
-    padding: 5px 60px;
+    width: 60px;
+    height: 60px;
     text-align: center;
     text-decoration: none;
     display: inline;
-    margin: 4px;
+    margin: 5px 50px;
     cursor: pointer;
-    border-radius: 25px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #999999;
+}
+
+button:after {
+    background-color: white;
 }
 
 .chrono {
@@ -23,8 +33,26 @@ button {
     justify-content: center;
     color: white;
     font-size: 100px;
+    top: 50%;
+}
+
+.main {
+    position: absolute;
+    top: 40%;
 }
 
 body {
+    position: relative;
+    border: 5px solid white;
+    border-radius: 50%;
+    height: 700px;
+    width: 700px;
+    display: flex;
+    justify-content: center;
     background-color: #18191c;
+}
+
+html {
+    display: table;
+    margin: auto;
 }

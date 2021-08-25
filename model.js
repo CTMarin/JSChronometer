@@ -31,11 +31,6 @@ export default class Model {
         this.diff = this.end - this.startTime;
         this.diff -= this.pauseOffset;
         this.diff = new Date(this.diff);
-        console.log(this.diff);
-        //this.pauseOffset = 0;
-        
-        //console.log(this.diff);
-        
 
         this.miliseconds = this.diff.getMilliseconds();
         this.seconds = this.diff.getSeconds();
@@ -59,7 +54,11 @@ export default class Model {
     resetRunning() {
         this.startTime = 0;
         this.pauseOffset = 0;
-        this.startRunning();
+        this.hours = 0;
+        this.minutes = 0;
+        this.seconds = 0;
+        this.miliseconds = 0;
+        this.view.update();
     }
 
     stopRunning() {

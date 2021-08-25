@@ -1,4 +1,5 @@
 import Reset from './components/reset.js';
+import Save from './components/save.js';
 import Start from './components/start.js';
 import Stop from './components/stop.js';
 import Model from './model.js';
@@ -9,10 +10,12 @@ export default class View {
         this.start = new Start();
         this.stop = new Stop();
         this.reset = new Reset();
+        this.save = new Save();
         this.currentTime = 0;
 
         this.stop.btn.style.display = "none";
         this.reset.btn.style.display = "none";
+        this.save.btn.style.display = "none";
     }
 
     setModel(model) {
